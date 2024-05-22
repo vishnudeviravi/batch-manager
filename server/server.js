@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const db = require('./db');
-
-//vishnu
-
 //dev
 const dotenv = require('dotenv');
 const morgan = require('morgan');

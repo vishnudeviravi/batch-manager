@@ -17,6 +17,6 @@ app.use(morgan('dev'));
 const routes = require('./routes');
 app.use(routes);
 
-const server = app.listen(process.env.PORT || 8888, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Express running → On PORT : ${server.address().port}`);
 });

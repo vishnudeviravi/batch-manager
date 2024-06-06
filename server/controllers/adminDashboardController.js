@@ -1,9 +1,9 @@
-import express from "express";
+import express from 'express';
 
 const router = express.Router();
-
+//ADMIN
 //get all co-ordinators
-router.get("admin/get-coordinator", async (req, res) => {
+router.get('admin/get-coordinator', async (req, res) => {
   try {
     const coordinator = await Coordinator.find();
     return res.status(200).json(coordinator);
@@ -13,7 +13,7 @@ router.get("admin/get-coordinator", async (req, res) => {
 });
 
 //get all trainer
-router.get("admin/get-trainer", async (req, res) => {
+router.get('admin/get-trainer', async (req, res) => {
   try {
     const trainer = await Trainer.find();
     return res.status(200).json(trainer);
@@ -23,7 +23,7 @@ router.get("admin/get-trainer", async (req, res) => {
 });
 
 //get all students
-router.get("admin/get-student", async (req, res) => {
+router.get('admin/get-student', async (req, res) => {
   try {
     const student = await Students.find();
     return res.status(200).json(students);

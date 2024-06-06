@@ -21,13 +21,3 @@ router.get("admin/get-trainer", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-//get all students
-router.get("admin/get-student", async (req, res) => {
-  try {
-    const student = await Students.find();
-    return res.status(200).json(students);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});

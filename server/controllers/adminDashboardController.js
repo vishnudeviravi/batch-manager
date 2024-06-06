@@ -1,3 +1,4 @@
+
 import express from "express";
 
 const router = express.Router();
@@ -21,3 +22,5 @@ router.get("admin/get-trainer", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+

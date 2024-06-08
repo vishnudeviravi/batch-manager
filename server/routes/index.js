@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const testController = require('../controllers/testController');
+const auth = require('./auth')
+const registration = require('./registration')
+const notification = require('./notification')
 
-// test route
-router.get('/', testController.test);
+//  team 1 routes 
+router.use('/auth', auth)
+router.use('/registration', auth)
+router.use('/notification', auth)
 
 module.exports = router;

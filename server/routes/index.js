@@ -1,9 +1,8 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const testController = require('../controllers/testController');
+const adminController = require("../controllers/adminDashboardController");
 
-// test route
-router.get('/', testController.test);
+router.get("/", adminController);
 
 module.exports = router;

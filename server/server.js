@@ -1,19 +1,19 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const db = require('./db');
-//dev
-const dotenv = require('dotenv');
-const morgan = require('morgan');
+const cors = require("cors");
+const db = require("./db");
 
-dotenv.config({ path: './.env' });
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+
+dotenv.config({ path: "./.env" });
 app.use(cors());
 app.use(express.json());
-app.use(express.static('/public'));
+app.use(express.static("/public"));
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-const routes = require('./routes');
+const routes = require("./routes");
 app.use(routes);
 
 const server = app.listen(process.env.PORT || 8888, () => {

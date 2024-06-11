@@ -14,8 +14,8 @@ app.use(express.static('/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
-const routes = require('./routes');
-app.use(routes);
+// const router = require('./routes');
+// app.use(router);
 
 const server = app.listen(process.env.PORT || 8888, () => {
   console.log(`Express running → On PORT : ${server.address().port}`);

@@ -15,9 +15,7 @@ const userSchema = Schema({
         type:String,
         required:true
     },
-    skills: {
-        
-    }
+
 })
 
 const User = model('users', userSchema)

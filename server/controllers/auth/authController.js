@@ -18,7 +18,7 @@ exports.sendOTP = async (req, res, next) => {
         }
     }
     else{
-        res.status(401).send('Invalid User number');
+        return res.status(401).send('Invalid User number');
     }
 };
 

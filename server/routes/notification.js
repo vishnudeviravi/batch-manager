@@ -1,14 +1,9 @@
-// const express = require('express');
-// const router = express.Router();
-// const authController = require('../controllers/auth/authController');
-// const authMiddleware = require('../middlewares/authMiddleware');
+const express = require('express');
+const router = express.Router();
+const notificationController = require('../controllers/notification/notificationController')
 
-// router.post('/registration-request', authController.sendotp);
+router.post('/add-notification', notificationController.scheduleNotification);
+router.post('/delete-notification', notificationController.deleteNotification);
 
-// router.get('/request-manage', authMiddleware.checkToken, authController.verifyotp);
 
-// router.post('/request-manage', authMiddleware.checkToken, authController.verifyotp);
- 
-// router.get('/logout', authMiddleware.checkToken, authController.logout);
-
-// module.exports = router;
+module.exports = router;

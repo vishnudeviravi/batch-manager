@@ -1,8 +1,8 @@
 
-exports.verifyNumber=(number)=>{
+exports.verifyUser=(number)=>{
     // if number in data base return data
     
-    return (position)
+    return ("admin")
 
     //else
     //return false

@@ -1,35 +1,43 @@
-const otpService = require('../services/otpService');
-const numberVerificationService = require('../../services/numberVerificationService')
-const mailer = require('../utils/mailer');
+const otpService = require('../../services/otpService');
+const userVerification = require('../../services/userVerification')
+const checkToken = require('../../middlewares/checkToken')
+const mailer = require('../../utils/mailer');
+const jwt = require('jsonwebtoken')
 
 exports.sendOTP = async (req, res, next) => {
-    // const position = numberVerificationService.verifyNumber(req.body.phoneNumber)
-    try {
-        const { email } = req.body;
-        const otp = otpService.generateOTP(email);
-        await mailer.sendMail(email, 'Your OTP Code', `Your OTP code is ${otp}`);
-        res.send('OTP sent successfully');
-    } catch (error) {
-        next(error);
+    const position = userVerification.verifyUser(req.body.Mobile_no)
+    if(position){ 
+        try {
+            const { email } = req.body;
+            const otp = otpService.generateOTP(email);
+            console.log(otp, "thid is otp",email)
+            await mailer.sendEmail(email, 'Your OTP Code', `Your OTP code is ${otp}`);
+            return res.status(200).send('OTP sent successfully');
+        } catch (error) {
+            return res.status(501).send('failed');
+        }
+    }
+    else{
+        res.status(401).send('Invalid User number');
     }
 };
 
 exports.verifyOTP = (req, res, next) => {
-    const { email, otp } = req.body;
-    if (otpService.verifyOTP(email, otp)) {
-        req.session.email = email;
-        res.send('OTP verified successfully');
+    const { email, OTP } = req.body;
+     
+    if (otpService.verifyOTP(email, OTP)) {
+        const token = jwt.sign({id:23,role:"trainer"},process.env.SECRET_KEY,{expiresIn:'1d'})
+       return res
+        .status(200)
+        .json({success:true, message:'login succesfull',token})      
+            
     } else {
-        res.status(401).send('Invalid or expired OTP');
+        return res.status(401).send('Invalid or expired OTP');
     }
 };
 
 exports.logout = (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).send('Error logging out');
-        } else {
-            return res.send('Logged out successfully');
-        }
-    });
+    const bToken = req.headers.authorization
+    checkToken.blacklistedTokens.add(bToken);
+    res.status(200).json({ message: 'Logged out successfully' });
 };

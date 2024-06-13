@@ -9,12 +9,17 @@ exports.generateOTP = (email) => {
 };
 
 exports.verifyOTP = (email, otp) => {
-    if (!otps[email]) return false;
+    console.log(typeof otps[email].otp,"otps",)
+    console.log(otp)
+    if (!otps[email]) {
+        return false;
+    }
     if (otps[email].expires < Date.now()) {
+        console.log("now here")
         delete otps[email];
         return false;
     }
-    if (otps[email].otp === otp) {
+    if (otps[email].otp == otp) {
         delete otps[email];
         return true;
     }

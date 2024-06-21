@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 exports.blacklistedTokens = new Set();
 
-exports.checkToken = role=>{
+exports.checkToken = role, id=>{
     return (req, res, next)=>{
         try {
             const bToken = req.headers.authorization
@@ -15,6 +15,10 @@ exports.checkToken = role=>{
             console.log(decoded)
 
             if(role.indexOf(decoded.role)==-1){
+                return res.status(403).json({message:'you are not authorized'})
+            }
+
+            if(id & id!=decoded.id){
                 return res.status(403).json({message:'you are not authorized'})
             }
             next()
